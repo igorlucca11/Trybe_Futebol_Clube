@@ -1,7 +1,9 @@
+import { QueryArgs } from "@testing-library/react";
+
 const SequelizeMock = require('sequelize-mock');
 const dbMock = new SequelizeMock();
- 
-const TeamsMock = dbMock.define('teams', [{
+
+const dataBase = [{
     id: 1,
     teamName: 'Vasco'
 },
@@ -12,24 +14,21 @@ const TeamsMock = dbMock.define('teams', [{
 {
     id: 3,
     teamName: 'Botafogo'
-} ]);
+} ]
  
-TeamsMock.$queryInterface.$useHandler((query: string) => {
+const TeamsMock = dbMock.define('teams');
+ 
+TeamsMock.$queryInterface.$useHandler((query: string, queryOptions: QueryArgs) => {
     if (query === 'findAll') {
-            return [{
-                id: 1,
-                teamName: 'Vasco'
-            },
-            {
-                id: 2,
-                teamName: 'Santos'
-            },
-            {
-                id: 3,
-                teamName: 'Botafogo'
-            } ];
+            return dataBase;
+    }
+    if (query === 'findById') {
+        const result = dataBase.find((team) => team.id === Number(queryOptions[0]))
+        return result;
     }
 }
 )
 
 export default TeamsMock;
+
+export { dataBase }
