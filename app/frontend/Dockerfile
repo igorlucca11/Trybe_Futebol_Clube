@@ -4,7 +4,7 @@ FROM node:16.14-alpine
   WORKDIR /app-frontend
 
 # Copiar os package.json e package-lock.json para o container
-COPY ./package*.json /app-frontend/
+COPY ./package* /app-frontend/
 
 # Instalar as dependências Node
 RUN npm install
