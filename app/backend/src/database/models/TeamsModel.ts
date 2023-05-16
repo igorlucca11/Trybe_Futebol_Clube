@@ -3,7 +3,7 @@ import db from '.';
 
 class Teams extends Model {
   declare id: number;
-  declare name: string;
+  declare teamName: string;
 }
 
 Teams.init({
@@ -24,3 +24,5 @@ Teams.init({
   underscored: true,
 
 });
+
+export default Teams;
