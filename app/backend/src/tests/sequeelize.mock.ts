@@ -16,9 +16,9 @@ const dataBase = [{
     teamName: 'Botafogo'
 } ]
  
-const TeamsMock = dbMock.define('teams');
+const TeamMock = dbMock.define('teams');
  
-TeamsMock.$queryInterface.$useHandler((query: string, queryOptions: QueryTypes) => {
+TeamMock.$queryInterface.$useHandler((query: string, queryOptions: QueryTypes) => {
     if (query === 'findAll') {
             return dataBase;
     }
@@ -29,6 +29,6 @@ TeamsMock.$queryInterface.$useHandler((query: string, queryOptions: QueryTypes) 
 }
 )
 
-export default TeamsMock;
+export default TeamMock;
 
 export { dataBase }
