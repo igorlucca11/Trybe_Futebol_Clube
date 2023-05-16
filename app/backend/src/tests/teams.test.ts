@@ -3,7 +3,8 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import * as sinon from 'sinon';
 import Teams from '../database/models/TeamsModel'
-import TeamsMock, { dataBase } from './sequeelize.mock';
+import TeamsMock from './sequeelize.mock';
+import { dataBase } from './sequeelize.mock';
 import { app } from '../app';
 import { Response } from 'superagent';
 
@@ -15,7 +16,7 @@ describe('Test the endpoint /teams', async () => {
 
   let chaiHttpResponse: Response;
 
-  beforeEach(async () => {
+  beforeEach(() => {
     sinon.stub(Teams, 'findAll')
     .resolves(TeamsMock.findAll())
     sinon.stub(Teams, 'findByPk')

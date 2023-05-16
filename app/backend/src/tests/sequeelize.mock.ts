@@ -1,4 +1,4 @@
-import { QueryArgs } from "@testing-library/react";
+import { QueryTypes } from "sequelize";
 
 const SequelizeMock = require('sequelize-mock');
 const dbMock = new SequelizeMock();
@@ -18,7 +18,7 @@ const dataBase = [{
  
 const TeamsMock = dbMock.define('teams');
  
-TeamsMock.$queryInterface.$useHandler((query: string, queryOptions: QueryArgs) => {
+TeamsMock.$queryInterface.$useHandler((query: string, queryOptions: QueryTypes) => {
     if (query === 'findAll') {
             return dataBase;
     }
