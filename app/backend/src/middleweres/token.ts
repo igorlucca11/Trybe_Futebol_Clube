@@ -1,5 +1,7 @@
-import { SignOptions, sign } from 'jsonwebtoken';
-// import { Request, Response, NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
+import { SignOptions, sign, verify } from 'jsonwebtoken';
+import User from '../database/models/UserModel';
+import { TOKEN_NOT_FOUND, INVALID_TOKEN } from '../errors';
 
 const secret = process.env.JWT_SECRET || 'jwt_secret';
 
@@ -8,30 +10,31 @@ const jwtConfig: SignOptions = {
   algorithm: 'HS256',
 };
 
-export default function createToken(name: string): string {
+export default function createToken(username: string, email: string): string {
   const token: string = sign(
-    { username: name },
+    { username,
+      email },
     secret,
     jwtConfig,
   );
   return token;
 }
 
-// export async function validate(req: Request, res: Response, next: NextFunction) {
-//   interface JwtPayload {
-//     username: string
-//   }
-//   const token = req.header('Authorization');
-//   if (!token) { next('err'); return; }
-//   try {
-//     const decoded = verify(token, secret);
-//     const { username } = decoded as JwtPayload;
-//     const model = new UserModel(connection);
-//     const user = await model.getByUsername(username);
-//     if (!user) { next('err'); return; }
-//     req.body.userId = user.id;
-//     next();
-//   } catch (err) {
-//     next(err);
-//   }
-// }
+export async function validateToken(req: Request, _res: Response, next: NextFunction) {
+  interface JwtPayload {
+    username: string,
+    email: string,
+  }
+  const token = req.header('Authorization');
+  if (!token) { next(TOKEN_NOT_FOUND); return; }
+  try {
+    const decoded = verify(token, secret);
+    const { username, email } = decoded as JwtPayload;
+    const user = await User.findOne({ where: { email } });
+    if (!user) { throw INVALID_TOKEN; }
+    if (user.email === email && user.username === username) {
+      req.body.user = user;
+      next();
+    } else { throw INVALID_TOKEN; }
+  } catch (err) { next(INVALID_TOKEN); }
+}

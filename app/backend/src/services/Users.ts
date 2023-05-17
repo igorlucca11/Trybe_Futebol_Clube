@@ -29,9 +29,14 @@ class servicesUsers {
   }
 
   static async logIn(req: Request, res: Response, _next: NextFunction) {
-    const { username } = req.body;
-    const token = await createToken(username);
+    const { username, email } = req.body;
+    const token = await createToken(username, email);
     return res.json({ token }).status(200);
+  }
+
+  static async getRole(req: Request, res: Response, _next: NextFunction) {
+    const { user } = req.body;
+    return res.status(200).json({ role: user.role });
   }
 }
 

@@ -56,7 +56,6 @@ describe('Test the endpoint /login', async () => {
     chaiHttpResponse = (await chai.request(app).post('/login')
     .set('X-API-Key', 'json')
     .send({ email: 'admin@admin.com' }))
-    console.log(chaiHttpResponse.body)
     expect(chaiHttpResponse.body).to.have.property('message')
   })
   it('Test if the endpoint /login retorna um erro sem senha', async () => {
@@ -67,7 +66,6 @@ describe('Test the endpoint /login', async () => {
     chaiHttpResponse = (await chai.request(app).post('/login')
     .set('X-API-Key', 'json')
     .send({ email: 'adminasdf@admin.com', password: 'secret_admin' }))
-    console.log(chaiHttpResponse.body)
     expect(chaiHttpResponse.body).to.have.property('message')
   })
   
