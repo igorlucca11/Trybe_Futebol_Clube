@@ -1,6 +1,6 @@
 import * as express from 'express';
 import routes from './routes';
-import Error from './errors';
+import MyErrors from './errors';
 
 class App {
   public app: express.Express;
@@ -14,7 +14,7 @@ class App {
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.use('/teams', routes.teamsRouter);
     this.app.use('/login', routes.loginRouter);
-    this.app.use((error: Error, _req: express
+    this.app.use((error: MyErrors, _req: express
       .Request, res: express.Response, _next: express.NextFunction) => {
       if (error.status) {
         return res.status(error.status).json({ message: error.message });
