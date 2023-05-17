@@ -9,7 +9,6 @@ const jwtConfig: SignOptions = {
 };
 
 export default function createToken(name: string): string {
-  console.log(secret);
   const token: string = sign(
     { username: name },
     secret,

@@ -3,8 +3,8 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import * as sinon from 'sinon';
 import Team from '../database/models/TeamModel'
-import TeamMock from './sequeelize.mock';
-import { dataBase } from './sequeelize.mock';
+import TeamMock from './teams.mock';
+import { dataBase } from './teams.mock';
 import { app } from '../app';
 import { Response } from 'superagent';
 
