@@ -1,5 +1,3 @@
-import { query } from "express";
-
 interface Query {
   0: {where: {email: string}}
 }

@@ -14,6 +14,7 @@ class App {
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.use('/teams', routes.teamsRouter);
     this.app.use('/login', routes.loginRouter);
+    this.app.use('/matches', routes.matchesRouter);
     this.app.use((error: MyErrors, _req: express
       .Request, res: express.Response, _next: express.NextFunction) => {
       if (error.status) {
