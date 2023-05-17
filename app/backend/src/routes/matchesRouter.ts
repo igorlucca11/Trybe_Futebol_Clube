@@ -1,8 +1,8 @@
 import * as express from 'express';
-import servicesMatches from '../services/Matches';
+import getMatches from '../middleweres/matchesQuerry';
 
 const matchesRouter = express.Router();
 
-matchesRouter.get('/', servicesMatches.getAll);
+matchesRouter.get('/', getMatches);
 
 export default matchesRouter;
