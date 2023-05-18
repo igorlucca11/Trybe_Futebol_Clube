@@ -43,6 +43,17 @@ class servicesMatches {
     console.log(updatedMatch);
     return res.json(updatedMatch).status(200);
   }
+
+  static async createMatch(req: Request, res: Response, _next: NextFunction) {
+    const { homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals } = req.body;
+    const match = await Match.create({ homeTeamId,
+      homeTeamGoals,
+      awayTeamId,
+      awayTeamGoals,
+      inProgress: true });
+    console.log(match);
+    return res.status(201).json(match.dataValues);
+  }
 }
 
 export default servicesMatches;

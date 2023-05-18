@@ -6,6 +6,7 @@ import servicesMatches from '../services/Matches';
 const matchesRouter = express.Router();
 
 matchesRouter.get('/', getMatches);
+matchesRouter.post('/', validateToken, servicesMatches.createMatch);
 matchesRouter.patch('/:id/finish', validateToken, servicesMatches.finishMatch);
 matchesRouter.patch('/:id', validateToken, servicesMatches.updateMatch);
 
