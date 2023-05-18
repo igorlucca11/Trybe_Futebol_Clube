@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import efficiencyCalculator from '../middleweres/eficiencyCalculator';
+import efficiencyCalculator, { Status } from '../middleweres/eficiencyCalculator';
 import Team from '../database/models/TeamModel';
 import Match from '../database/models/MatchModel';
 
@@ -8,19 +8,6 @@ export interface team {
   awayMatch: [{ homeTeamGoals: number, awayTeamGoals: number }],
   teamName: string,
   id: number,
-}
-
-export interface status{
-  name: string,
-  totalPoints: number,
-  totalGames: number,
-  totalVictories: number,
-  totalDraws: number,
-  totalLosses: number,
-  goalsFavor: number,
-  goalsOwn: number,
-  goalsBalance: number,
-  efficiency: number,
 }
 
 class servicesLeaderboard {
@@ -46,7 +33,7 @@ class servicesLeaderboard {
     return inicialStatus;
   }
 
-  static orderLeaderboard(board: Array<status>) {
+  static orderLeaderboard(board: Array<Status>) {
     board.sort((a, b) => {
       const points = b.totalPoints - a.totalPoints;
       if (points !== 0) { return points; }

@@ -7,7 +7,7 @@ export interface Status {
   totalLosses: number,
   goalsFavor: number,
   goalsOwn: number,
-  golsBalance: number,
+  goalsBalance: number,
   efficiency: number,
 }
 
