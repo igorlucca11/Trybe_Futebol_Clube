@@ -33,6 +33,16 @@ class servicesMatches {
     console.log(updatedMatch);
     return res.json({ message: 'Finished' }).status(200);
   }
+
+  static async updateMatch(req: Request, res: Response, _next: NextFunction) {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    const updatedMatch = await Match.update({
+      homeTeamGoals, awayTeamGoals }, {
+      where: { id } });
+    console.log(updatedMatch);
+    return res.json(updatedMatch).status(200);
+  }
 }
 
 export default servicesMatches;
