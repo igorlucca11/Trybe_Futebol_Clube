@@ -40,7 +40,6 @@ class servicesMatches {
     const updatedMatch = await Match.update({
       homeTeamGoals, awayTeamGoals }, {
       where: { id } });
-    console.log(updatedMatch);
     return res.json(updatedMatch).status(200);
   }
 
@@ -51,7 +50,6 @@ class servicesMatches {
       awayTeamId,
       awayTeamGoals,
       inProgress: true });
-    console.log(match);
     return res.status(201).json(match.dataValues);
   }
 }
