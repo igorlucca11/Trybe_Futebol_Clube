@@ -1,3 +1,4 @@
+import { NextFunction, Request, Response } from 'express';
 import Match from '../database/models/MatchModel';
 
 class servicesMatches {
@@ -22,6 +23,15 @@ class servicesMatches {
           attributes: ['teamName'] },
       ] });
     return matches;
+  }
+
+  static async finishMatch(req: Request, res: Response, _next: NextFunction) {
+    const { id } = req.params;
+    const updatedMatch = await Match.update({
+      inProgress: false }, {
+      where: { id } });
+    console.log(updatedMatch);
+    return res.json({ message: 'Finished' }).status(200);
   }
 }
 
