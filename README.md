@@ -11,3 +11,5 @@ Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua cr
 Os arquivos desenvolvidos em /app/backend/src foram desenvololvidos por mim (Exceto o arquivo server.ts e parte do arquivo app.js que ja vieram com o projeto)
 Os Dockerfiles em /app/backend e /app/frontend também foram desenvolvidos por mim.
 O restante dos arquivos entregues pela Trybe como base para desenvolvimento do projeto.
+
+O projeto uma API que gerencia a tabela de um campeonato de futebol.
